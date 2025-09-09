@@ -1,0 +1,23 @@
+{
+  "/api/proxy/*": {
+    "target": "https://cors-anywhere.herokuapp.com/",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api/proxy": ""
+    },
+    "headers": {
+      "Origin": "https://cors-anywhere.herokuapp.com"
+    }
+  },
+  "/proxy/*": {
+    "target": "https://api.allorigins.win/raw?url=",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/proxy": ""
+    }
+  }
+}

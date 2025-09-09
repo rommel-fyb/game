@@ -17,6 +17,28 @@
       </div>
     </div>
 
+    <div class="proxy-selection">
+      <h3>🌐 Proxy Settings (for geo-locked games)</h3>
+      <div class="proxy-options">
+        <div 
+          *ngFor="let proxy of proxyServices" 
+          class="proxy-option"
+          [class.selected]="selectedProxy === proxy.id"
+          (click)="selectedProxy = proxy.id">
+          <input 
+            type="radio" 
+            [id]="proxy.id" 
+            [value]="proxy.id" 
+            [(ngModel)]="selectedProxy"
+            name="proxy">
+          <label [for]="proxy.id">
+            <strong>{{ proxy.name }}</strong>
+            <span class="description">{{ proxy.description }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
     <div class="url-input">
       <input 
         type="url" 
@@ -31,9 +53,16 @@
       {{ errorMessage }}
     </div>
 
+    <div *ngIf="proxyStatus" class="proxy-status" [class.success]="proxyStatus.includes('✅')" [class.error]="proxyStatus.includes('❌')">
+      {{ proxyStatus }}
+    </div>
+
     <div *ngIf="isLoading" class="loading">
       <h3>Loading game...</h3>
       <p>Please wait while we load your game.</p>
+      <div *ngIf="selectedProxy !== 'none'" class="proxy-info">
+        <small>Using {{ getProxyName(selectedProxy) }} proxy</small>
+      </div>
     </div>
 
     <div *ngIf="currentGameUrl && !isLoading">
