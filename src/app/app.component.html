@@ -1,0 +1,53 @@
+<div class="container">
+  <header class="header">
+    <h1>🎮 Game Iframe Player</h1>
+    <p>Load and play any web-based game in an iframe</p>
+  </header>
+
+  <div class="game-container">
+    <div class="preset-games">
+      <h3>Quick Start - Try These Games:</h3>
+      <div class="preset-buttons">
+        <button 
+          *ngFor="let game of presetGames" 
+          class="preset-btn"
+          (click)="loadPresetGame(game.url)">
+          {{ game.name }}
+        </button>
+      </div>
+    </div>
+
+    <div class="url-input">
+      <input 
+        type="url" 
+        [(ngModel)]="gameUrl" 
+        placeholder="Enter game URL (e.g., https://example.com/game)"
+        (keyup.enter)="loadGame()">
+      <button class="btn" (click)="loadGame()">Load Game</button>
+      <button class="btn" (click)="clearGame()" *ngIf="currentGameUrl">Clear</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <h3>Loading game...</h3>
+      <p>Please wait while we load your game.</p>
+    </div>
+
+    <div *ngIf="currentGameUrl && !isLoading">
+      <iframe 
+        [src]="currentGameUrl" 
+        class="game-frame"
+        title="Game Frame"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div *ngIf="!currentGameUrl && !isLoading" class="loading">
+      <h3>Welcome to Game Iframe Player!</h3>
+      <p>Enter a game URL above or click one of the preset games to get started.</p>
+    </div>
+  </div>
+</div>
