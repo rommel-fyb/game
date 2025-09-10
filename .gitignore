@@ -140,3 +140,6 @@ temp/
 
 # AWS deployment files (optional - uncomment if you don't want to track these)
 # AWS_EC2_DEPLOYMENT_GUIDE.md
+/.vs/game/CopilotIndices/17.14.1091.29919
+/.vs/game/FileContentIndex
+/.vs
